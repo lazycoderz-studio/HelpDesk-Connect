@@ -17,6 +17,7 @@ HelpDesk Connect is a real-time chat application designed to connect customers w
 ####  ChatSessions Table: Stores details of chat sessions, including timestamps and statuses. 
 
 ## Architectural Design
+```
  +-----------+           +---------------------+            +------------+
  |           |           |                     |            |            |
  | Customer  +<--------->+  WebSocket Server   +<---------->+ PostgreSQL |
@@ -29,3 +30,5 @@ HelpDesk Connect is a real-time chat application designed to connect customers w
                          | Agent     |   | REST API   |     | Queue    |
                          | Interface |   |            |     | Management|
                          +-----------+   +------------+     +----------+
+
+```
