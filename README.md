@@ -12,7 +12,7 @@ HelpDesk Connect is a real-time chat application designed to connect customers w
 
 ## Database (PostgreSQL):
 
-####  Agents Table: Stores information about agents.
+####  Users Table: Stores information about agents.
 ####  Customers Table: Stores session details for customers.
 ####  ChatSessions Table: Stores details of chat sessions, including timestamps and statuses. 
 
