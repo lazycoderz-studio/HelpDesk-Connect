@@ -124,7 +124,8 @@ Backend server updates the database, marking the session as complete and removin
 Supervisor are either the top level agent which interact with customer when agent are unable resolve the queries or training, evaluating and monitoring agents
 Agents are persons who interact with customer.
 ###  Authentication and Authorization for Users based on type
-```+-------------------+     +------------------+     +-----------------------+
+```
++-------------------+     +------------------+     +-----------------------+
 |                   |     |                  |     |                       |
 | User submits      |     | Backend receives |     | Backend verifies      |
 | email and password|---->| credentials via  |---->| credentials against   |
@@ -141,7 +142,8 @@ Agents are persons who interact with customer.
 |                       |     |                  |     |                       |
 +-----------------------+     +------------------+     +-----------------------+
 ```
-``` +-----------------------+     +-----------------------+     +------------------------+
+```
++-----------------------+     +-----------------------+     +------------------------+
 |                       |     |                       |     |                        |
 | User makes request to |     | Frontend includes JWT |     | Backend middleware     |
 | access protected      |---->| in Authorization      |---->| validates JWT and      |
