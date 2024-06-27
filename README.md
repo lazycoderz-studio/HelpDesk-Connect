@@ -64,3 +64,59 @@ End Session:
 
 When the chat is complete, the agent marks the session as complete.
 Backend server updates the database, marking the session as complete and removing the customer from the queue.
+
+
+### Authentication and Authorization Flow for Agent
+```
++--------------------------+
+|                          |
+|        Frontend          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| |   Login Interface    | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Token Management     | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Protected Routes     | |
+| |                      | |
+| +----------------------+ |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|                          |
+|         Backend          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| | Authentication API   | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Authorization        | |
+| | Middleware           | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | User Management      | |
+| |                      | |
+| +----------------------+ |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|                          |
+|        Database          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| |      Users Table     | |
+| |                      | |
+| +----------------------+ |
++--------------------------+
+```
