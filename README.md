@@ -64,3 +64,99 @@ End Session:
 
 When the chat is complete, the agent marks the session as complete.
 Backend server updates the database, marking the session as complete and removing the customer from the queue.
+
+
+### Authentication and Authorization Flow for Agent
+```
++--------------------------+
+|                          |
+|        Frontend          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| |   Login Interface    | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Token Management     | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Protected Routes     | |
+| |                      | |
+| +----------------------+ |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|                          |
+|         Backend          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| | Authentication API   | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | Authorization        | |
+| | Middleware           | |
+| |                      | |
+| +----------------------+ |
+| |                      | |
+| | User Management      | |
+| |                      | |
+| +----------------------+ |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|                          |
+|        Database          |
+|                          |
+| +----------------------+ |
+| |                      | |
+| |      Users Table     | |
+| |                      | |
+| +----------------------+ |
++--------------------------+
+```
+## Concept of Agent and Supervisor
+Supervisor are either the top level agent which interact with customer when agent are unable resolve the queries or training, evaluating and monitoring agents
+Agents are persons who interact with customer.
+###  Authentication and Authorization for Users based on type
+```
++-------------------+     +------------------+     +-----------------------+
+|                   |     |                  |     |                       |
+| User submits      |     | Backend receives |     | Backend verifies      |
+| email and password|---->| credentials via  |---->| credentials against   |
+| via login form    |     | login API        |     | the database          |
+|                   |     |                  |     |                       |
++-------------------+     +------------------+     +-----------------------+
+                                                      |
+                                                      v
++-----------------------+     +------------------+     +-----------------------+
+|                       |     |                  |     |                       |
+| Backend generates     |     | Backend sends    |     | Frontend receives JWT |
+| JWT with user ID and  |---->| JWT to frontend  |---->| and stores it securely|
+| role                  |     |                  |     |                       |
+|                       |     |                  |     |                       |
++-----------------------+     +------------------+     +-----------------------+
+```
+```
++-----------------------+     +-----------------------+     +------------------------+
+|                       |     |                       |     |                        |
+| User makes request to |     | Frontend includes JWT |     | Backend middleware     |
+| access protected      |---->| in Authorization      |---->| validates JWT and      |
+| resource              |     | header of the request |     | extracts user info     |
+|                       |     |                       |     |                        |
++-----------------------+     +-----------------------+     +------------------------+
+                                                              |
+                                                              v
++------------------------+     +-----------------------+     +-----------------------+
+|                        |     |                       |     |                       |
+| Backend checks user’s  |     | If authorized,        |     | Backend processes     |
+| role against required  |---->| backend processes     |---->| request and sends     |
+| permissions            |     | request               |     | response to frontend  |
+|                        |     |                       |     |                       |
++------------------------+     +-----------------------+     +-----------------------+
+```
