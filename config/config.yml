@@ -1,0 +1,16 @@
+app:
+  port: 8080
+  env: "development"
+
+database:
+  host: "localhost"
+  port: 5432
+  user: "binodthapa"
+  password: "binod"
+  dbname: "help_desk_connect"
+  sslmode: "disable"
+
+websocket:
+  endpoint: "/ws"
+  readBufferSize: 1024
+  writeBufferSize: 1024
